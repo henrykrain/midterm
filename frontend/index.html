@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <h1>Birthday Reminder</h1>
+        <!-- Form for adding/updating entries will go here -->
+        <div id="entry-form">
+            <input type="text" id="name" placeholder="Name">
+            <input type="date" id="birthday">
+            <button onclick="addOrUpdateEntry()">Add/Update</button>
+        </div>
+        <!-- List of entries will be displayed here -->
+        <div id="entries"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
