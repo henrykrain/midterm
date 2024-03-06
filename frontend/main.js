@@ -1,3 +1,5 @@
+let updateEntryID=null;
+
 // Base API URL
 const apiUrl = 'http://127.0.0.1:8000/birthdays/';
 
@@ -20,10 +22,22 @@ async function fetchEntries() {
 function displayEntries() {
     const entriesDiv = document.getElementById('entries');
     entriesDiv.innerHTML = ''; // Clear current entries
+
+    // Function to format date from "yyyy-mm-dd" to "mm/dd/yyyy"
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        // Adding 1 because JavaScript months are 0-based
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${month}/${day}/${year}`;
+    }
+
     entries.forEach(entry => {
+        const formattedBirthday = formatDate(entry.birthday);
         entriesDiv.innerHTML += `
             <div class="entry">
-                <span>${entry.name}: ${new Date(entry.birthday).toISOString().split('T')[0]}</span>
+                <span>${entry.name}: ${formattedBirthday}</span>
                 <button onclick="deleteEntry(${entry.id})">Delete</button>
             </div>
         `;
