@@ -15,18 +15,14 @@ async function fetchEntries() {
     }
 }
 
-
-// Assuming the rest of the main.js code remains the same
-
 // Display entries in the HTML
 function displayEntries() {
     const entriesDiv = document.getElementById('entries');
-    entriesDiv.innerHTML = ''; // Clear current entries
+    entriesDiv.innerHTML = ''; 
 
-    // Function to format date from "yyyy-mm-dd" to "mm/dd/yyyy"
+    // Function to format date from "mm/dd/yyyy"
     function formatDate(dateString) {
         const date = new Date(dateString);
-        // Adding 1 because JavaScript months are 0-based
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate() + 1).padStart(2, '0');
         const year = date.getFullYear();
@@ -39,6 +35,8 @@ function displayEntries() {
             <div class="entry">
                 <span>${entry.name}: ${formattedBirthday}</span>
                 <button onclick="deleteEntry(${entry.id})">Delete</button>
+                <button onclick="prepareUpdateForm(${entry.id})">Edit</button>
+
             </div>
         `;
     });
@@ -53,7 +51,7 @@ async function addOrUpdateEntry() {
         birthday: birthdayInput.value,
     };
 
-    // Adding new entries only for simplicity. Update logic would need tracking selected entry's ID
+    
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -63,15 +61,66 @@ async function addOrUpdateEntry() {
             body: JSON.stringify(entry),
         });
         if (!response.ok) throw new Error('Error adding/updating entry');
-        const addedEntry = await response.json(); // Get the added entry from response
-        entries.push(addedEntry); // Add the new entry to the local list
-        displayEntries(); // Refresh the displayed list
-        nameInput.value = ''; // Clear form
-        birthdayInput.value = ''; // Clear form
+        const addedEntry = await response.json(); 
+        entries.push(addedEntry); 
+        displayEntries(); 
+        nameInput.value = ''; 
+        birthdayInput.value = ''; 
     } catch (error) {
         console.error('Failed to add/update entry:', error);
     }
 }
+
+let currentEntryId = null; 
+
+function prepareUpdateForm(entryId) {
+    const entry = entries.find(e => e.id === entryId);
+    if (!entry) return;
+
+    document.getElementById('editName').value = entry.name;
+    document.getElementById('editBirthday').value = entry.birthday; 
+    currentEntryId = entryId;
+
+    // Display the modal
+    document.getElementById('editModal').style.display = "flex";
+}
+
+// Close the modal when the user clicks on save changes (x)
+document.getElementsByClassName("close")[0].onclick = function() {
+    document.getElementById('editModal').style.display = "none";
+}
+
+// Close the modal if the user clicks anywhere outside of it
+window.onclick = function(event) {
+    if (event.target == document.getElementById('editModal')) {
+        document.getElementById('editModal').style.display = "none";
+    }
+}
+
+// Update the entry
+async function updateEntry() {
+    const updatedName = document.getElementById('editName').value;
+    const updatedBirthday = document.getElementById('editBirthday').value;
+
+    try {
+        const response = await fetch(`${apiUrl}${currentEntryId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: updatedName, birthday: updatedBirthday }),
+        });
+        if (!response.ok) throw new Error('Error updating entry');
+
+        // Refresh the entries list
+        fetchEntries();
+        // Hide the modal
+        document.getElementById('editModal').style.display = "none";
+    } catch (error) {
+        console.error('Failed to update entry:', error);
+    }
+}
+
 
 // Delete an entry
 async function deleteEntry(entryId) {
@@ -80,11 +129,11 @@ async function deleteEntry(entryId) {
             method: 'DELETE',
         });
         if (!response.ok) throw new Error('Error deleting entry');
-        fetchEntries(); // Refresh entries list
+        fetchEntries(); 
     } catch (error) {
         console.error('Failed to delete entry:', error);
     }
 }
 
-// Initial fetch of the entries
+
 fetchEntries();
