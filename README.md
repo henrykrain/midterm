@@ -14,7 +14,7 @@ Future development hopes to include the addition of a astrological sign graphic 
 
 ## Usage
 1. **Adding a Birthday**: Fill in the name and date of birth in the form at the top of the page and click `Submit`.
-2. **Editing a Birthday**: Click the `Edit` button next to any entry to open the editing modal. Make your changes and click `Save`.
+2. **Editing a Birthday**: Click the `Edit` button next to any entry to open the editing modal. Make your changes and click `Save Changes`.
 3. **Deleting a Birthday**: Click the `Delete` button next to any entry you wish to remove.
 
 ## Screenshots
