@@ -9,11 +9,8 @@ The Birthday Reminder Web Application is designed to help those with busy schedu
 - **Edit Birthdays**: Made a mistake or need to update a date? Click the edit button next to any entry to open a modal where you can make changes.
 - **Delete Birthdays**: If an entry is no longer needed, easily remove it from your list with the delete option.
 
-## Getting Started
-To get started with the Birthday Reminder Web Application, simply clone the repository to your local machine:
-
-
-Navigate to the project directory and open `index.html` in your preferred web browser to launch the application.
+##Future Development
+Future development hopes to include the addition of a astrological sign graphic and even a compatibility to the user's astrological sign. Also, an algorithm that sorts birthdays on relevancy. 
 
 ## Usage
 1. **Adding a Birthday**: Fill in the name and date of birth in the form at the top of the page and click `Submit`.
@@ -29,7 +26,4 @@ Here are some screenshots to give you a preview of the Birthday Reminder Web App
 ![image](https://github.com/henrykrain/midterm/assets/120867004/be5c3f47-51e1-4c19-b283-276a5ba2e54a)
 
 ## Contributions
-Contributions are welcome! If you have suggestions for improvements or encounter any issues, please feel free to file an issue or submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Contributions are welcome! If you have suggestions for future changes please let me know!
