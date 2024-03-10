@@ -9,7 +9,7 @@ The Birthday Reminder Web Application is designed to help those with busy schedu
 - **Edit Birthdays**: Made a mistake or need to update a date? Click the edit button next to any entry to open a modal where you can make changes.
 - **Delete Birthdays**: If an entry is no longer needed, easily remove it from your list with the delete option.
 
-##Future Development
+## Future Development
 Future development hopes to include the addition of a astrological sign graphic and even a compatibility to the user's astrological sign. Also, an algorithm that sorts birthdays on relevancy. 
 
 ## Usage
